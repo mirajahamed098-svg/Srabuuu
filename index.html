@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffdae0; /* Lovely Pink Theme */
+            background-color: #ffdae0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -66,7 +66,6 @@
             width: 100%;
             border-radius: 20px;
             margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             background: #000;
         }
 
@@ -94,6 +93,10 @@
     </style>
 </head>
 <body>
+
+<audio id="loveSong">
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <div class="container">
     <div id="page1" class="page active">
@@ -142,7 +145,6 @@
         if(pageNumber === 2) {
             let video = document.getElementById('myVideo');
             video.play().catch(e => {
-                // If autoplay is blocked, show controls so user can click play
                 video.controls = true;
             });
         }
@@ -154,18 +156,13 @@
         let questionText = document.getElementById('questionText');
 
         if (noClickCount <= 4) {
-            // Update Text
             questionText.innerText = noTexts[noClickCount - 1];
-
-            // Move Button Randomly
             let x = Math.random() * (window.innerWidth - 120);
             let y = Math.random() * (window.innerHeight - 120);
-            
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         } else {
-            // Final Rejection Message
             document.getElementById('btnContainer').style.display = 'none';
             questionText.style.display = 'none';
             document.getElementById('finalResponse').innerText = "I respect your opinion. I haven’t given up on you, and I never will. I’ve been waiting for you, and I’ll keep waiting. 🖤";
@@ -173,12 +170,16 @@
     }
 
     function ansYes() {
+        // Start Music
+        let song = document.getElementById('loveSong');
+        song.play().catch(e => console.log("Music blocked by browser"));
+
+        // Show Message
         document.getElementById('btnContainer').style.display = 'none';
         document.getElementById('questionText').style.display = 'none';
-        document.getElementById('finalResponse').innerText = "Maybe the biggest achievement of my life will always be that I got you back. I’ll try my best to never make you cry and to always treat you like a princess. Being perfect isn’t my goal, being with you is. I love you. 🖤";
+        document.getElementById('finalResponse').innerHTML = "Maybe the biggest achievement of my life will always be that I got you back. I’ll try my best to never make you cry and to always treat you like a princess. Being perfect isn’t my goal, being with you is. I love you. 🖤 <br><br> <span style='font-size: 0.8rem; color: #ff4d6d;'>🎵 Playing: I think they call this love</span>";
     }
 </script>
 
 </body>
 </html>
-
