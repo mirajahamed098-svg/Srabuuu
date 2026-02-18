@@ -3,185 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+    <title>For Someone Special</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #ffdae0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            color: #4a4a4a;
             text-align: center;
         }
 
         .container {
-            width: 85%;
+            width: 90%;
             max-width: 500px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px 20px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
-            border: 2px solid #fff;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        .page { display: none; }
-        .active { display: block; animation: fadeIn 0.8s ease-in-out; }
+        .page { display: none; animation: fadeIn 1.5s ease-in-out; }
+        .active { display: block; }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        p, h2 { 
-            font-size: 1.1rem; 
-            line-height: 1.7; 
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .btn {
+        h1 { color: #d63384; line-height: 1.5; font-size: 24px; }
+        
+        button {
             background-color: #ff4d6d;
             color: white;
             border: none;
-            padding: 14px 30px;
-            border-radius: 50px;
+            padding: 12px 25px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
+            font-size: 18px;
+            margin: 10px;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
         }
 
-        .btn:hover { 
-            background-color: #ff758f; 
-            transform: translateY(-2px);
-        }
+        button:hover { background-color: #c9184a; transform: scale(1.05); }
 
-        video {
-            width: 100%;
-            border-radius: 20px;
-            margin: 15px 0;
-            background: #000;
-        }
+        #noBtn { position: relative; transition: all 0.2s ease; z-index: 100; }
 
-        .proposal-btns {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            min-height: 150px;
-            position: relative;
-        }
+        video { width: 100%; border-radius: 15px; margin-bottom: 15px; border: 2px solid #ffdae0; }
 
-        #noBtn {
-            position: absolute;
-            transition: all 0.2s ease;
-            z-index: 100;
-        }
-
-        .final-msg { 
-            font-size: 1.2rem; 
-            line-height: 1.6; 
-            color: #d63384; 
-            font-weight: bold;
-        }
+        .final-msg { font-size: 18px; font-weight: bold; color: #555; line-height: 1.6; }
     </style>
 </head>
 <body>
 
-<audio id="loveSong">
-    <source src="song.mp3" type="audio/mpeg">
-</audio>
-
-<div class="container">
-    <div id="page1" class="page active">
-        <p>“I don’t know what to say or how to start because I’ve already told you everything while sitting in front of you. 
-        There’s really nothing new left for me to say. I just want you to always be happy. 
-        Still, the person sitting in front of you, in their eyes, you keep shining, 
-        and I’m still looking at you without blinking, because he loves you more than you know. 
-        I really have no expectations because I already know the answer, 
-        and still, I’ve prepared some things that I want you to see or know.”</p>
-        <button class="btn" onclick="nextPage(2)">Continue</button>
-    </div>
-
-    <div id="page2" class="page">
-        <p>Pass my nights doing all these stuff...</p>
-        <video id="myVideo" playsinline>
-            <source src="videos1.mp4" type="video/mp4">
-            Your browser doesn't support video.
-        </video>
-        <br>
-        <button class="btn" onclick="nextPage(3)">Continue</button>
-    </div>
-
-    <div id="page3" class="page">
-        <h2 id="questionText">I know the answer is likely no, but I had to take a chance and ask if you'd be my wife? 💍</h2>
-        <div class="proposal-btns" id="btnContainer">
-            <button class="btn" id="yesBtn" onclick="ansYes()">Yes</button>
-            <button class="btn" id="noBtn" onclick="ansNo()">No</button>
+    <div class="container">
+        <div id="page1" class="page active">
+            <h1> I have something to tell you...</h1>
+            <button onclick="nextPage(2)">Continue </button>
         </div>
-        <div id="finalResponse" class="final-msg"></div>
+
+        <div id="page2" class="page">
+            <h1>Look at this...</h1>
+            <video controls id="myVideo">
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <br>
+            <button onclick="nextPage(3)">Continue </button>
+        </div>
+
+        <div id="page3" class="page">
+            <h1 id="questionText">I know the answer is likely no, but I had to take a chance and ask if you'd be my wife?</h1>
+            <div id="btnContainer">
+                <button id="yesBtn" onclick="handleYes()">Yes</button>
+                <button id="noBtn" onclick="handleNo()">No</button>
+            </div>
+            <p id="finalResponse" class="final-msg"></p>
+        </div>
     </div>
-</div>
 
-<script>
-    let noClickCount = 0;
-    const noTexts = [
-        "Are you sure? 🥺",
-        "Please Think once ☹️",
-        "I don't want to lose you 😢💔",
-        "Stay with me 💔"
-    ];
+    <audio id="bgMusic">
+        <source src="Song.mp3" type="audio/mpeg">
+    </audio>
 
-    function nextPage(pageNumber) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById('page' + pageNumber).classList.add('active');
-        
-        if(pageNumber === 2) {
-            let video = document.getElementById('myVideo');
-            video.play().catch(e => {
-                video.controls = true;
-            });
+    <script>
+        let noClickCount = 0;
+        const noTexts = ["Are you sure?", "Think once", "You’re everything", "Stay with me"];
+
+        function nextPage(pageNum) {
+            // Video pause logic when moving from page 2
+            const video = document.getElementById('myVideo');
+            if (pageNum === 3) video.pause();
+
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + pageNum).classList.add('active');
         }
-    }
 
-    function ansNo() {
-        noClickCount++;
-        let noBtn = document.getElementById('noBtn');
-        let questionText = document.getElementById('questionText');
+        function handleNo() {
+            let noBtn = document.getElementById('noBtn');
+            let questionText = document.getElementById('questionText');
 
-        if (noClickCount <= 4) {
-            questionText.innerText = noTexts[noClickCount - 1];
-            let x = Math.random() * (window.innerWidth - 120);
-            let y = Math.random() * (window.innerHeight - 120);
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        } else {
-            document.getElementById('btnContainer').style.display = 'none';
-            questionText.style.display = 'none';
-            document.getElementById('finalResponse').innerText = "I respect your opinion. I haven’t given up on you, and I never will. I’ve been waiting for you, and I’ll keep waiting. 🖤";
+            if (noClickCount < 4) {
+                // Button moves randomly within the screen
+                let x = Math.random() * (window.innerWidth - 150);
+                let y = Math.random() * (window.innerHeight - 100);
+                noBtn.style.position = "fixed";
+                noBtn.style.left = x + "px";
+                noBtn.style.top = y + "px";
+                
+                noBtn.innerText = noTexts[noClickCount];
+                noClickCount++;
+            } else {
+                // 5th click message
+                document.getElementById('btnContainer').style.display = "none";
+                questionText.innerText = "I respect your opinion. I haven’t given up on you, and i never will . I’ve been waiting for you , and i’ll keep waiting.";
+            }
         }
-    }
 
-    function ansYes() {
-        // Start Music
-        let song = document.getElementById('loveSong');
-        song.play().catch(e => console.log("Music blocked by browser"));
+        function handleYes() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Music play failed, usually needs user interaction first."));
 
-        // Show Message
-        document.getElementById('btnContainer').style.display = 'none';
-        document.getElementById('questionText').style.display = 'none';
-        document.getElementById('finalResponse').innerHTML = ""I am honestly speechless right now. I was fully prepared for a 'no', but hearing you say 'yes' is the best feeling in the world. I promise to cherish your trust and make you happy every day. Getting you back is truly the biggest achievement of my life. I’m so excited for our future together. 🖤 <br><br> <span style='font-size: 0.8rem; color: #ff4d6d;'>🎵 Playing: I think they call this love</span>";
-    }
-</script>
-
+            document.getElementById('btnContainer').style.display = "none";
+            document.getElementById('questionText').style.display = "none";
+            
+            document.getElementById('finalResponse').innerText = "I am honestly speechless right now. I was fully prepared for a 'no', but hearing you say 'yes' is the best feeling in the world. I promise to cherish your trust and make you happy every day. Getting you back is truly the biggest achievement of my life. I’m so excited for our future together.";
+        }
+    </script>
 </body>
 </html>
-
-
